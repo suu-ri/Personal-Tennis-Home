@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (date && duration && notes) {
             const log = { date, duration, notes };
             saveLog(log);
-            appendLog(log);
+            refreshLogs(); // 不直接添加，而是刷新整个列表
             trainingForm.reset();
         }
     }
@@ -52,16 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadLogs() {
         let logs = JSON.parse(localStorage.getItem('tennisLogs')) || [];
+        logList.innerHTML = ''; // 清空现有列表
         logs.forEach((log, index) => appendLog(log, index));
     }
 
     function appendLog(log, index) {
         const li = document.createElement('li');
-        li.innerHTML = `<strong>日期:</strong> ${log.date} <br>
-                        <strong>时长:</strong> ${log.duration} 分钟 <br>
-                        <strong>感受:</strong> ${log.notes}
-                        <button class="edit" onclick="editLog(${index})">编辑</button>
-                        <button class="delete" onclick="deleteLog(${index})">删除</button>`;
+        li.innerHTML = `<strong>Date:</strong> ${log.date} <br>
+                        <strong>Duration:</strong> ${log.duration} minutes <br>
+                        <strong>Feelings:</strong> ${log.notes}
+                        <button class="edit" onclick="editLog(${index})">Edit</button>
+                        <button class="delete" onclick="deleteLog(${index})">Delete</button>`;
         logList.appendChild(li);
     }
 
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (title && url) {
             const video = { title, url };
             saveVideo(video);
-            appendVideo(video);
+            refreshVideos(); // 不直接添加，而是刷新整个列表
             videoForm.reset();
         }
     }
@@ -119,14 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadVideos() {
         let videos = JSON.parse(localStorage.getItem('tennisVideos')) || [];
+        videoList.innerHTML = ''; // 清空现有列表
         videos.forEach((video, index) => appendVideo(video, index));
     }
 
     function appendVideo(video, index) {
         const li = document.createElement('li');
         li.innerHTML = `<a href="${video.url}" target="_blank">${video.title}</a>
-                        <button class="edit" onclick="editVideo(${index})">编辑</button>
-                        <button class="delete" onclick="deleteVideo(${index})">删除</button>`;
+                        <button class="edit" onclick="editVideo(${index})">Edit</button>
+                        <button class="delete" onclick="deleteVideo(${index})">Delete</button>`;
         videoList.appendChild(li);
     }
 
