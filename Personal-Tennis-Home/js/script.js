@@ -47,11 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function saveLog(log) {
         let logs = JSON.parse(localStorage.getItem('tennisLogs')) || [];
         logs.push(log);
+        // 在保存时就进行排序
+        logs.sort((a, b) => new Date(b.date) - new Date(a.date));
         localStorage.setItem('tennisLogs', JSON.stringify(logs));
     }
 
     function loadLogs() {
         let logs = JSON.parse(localStorage.getItem('tennisLogs')) || [];
+        // 确保加载时也进行排序（以防万一）
+        logs.sort((a, b) => new Date(b.date) - new Date(a.date));
         logList.innerHTML = ''; // 清空现有列表
         logs.forEach((log, index) => appendLog(log, index));
     }
@@ -73,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: document.getElementById('duration').value,
             notes: document.getElementById('notes').value
         };
+        // 更新后重新排序
+        logs.sort((a, b) => new Date(b.date) - new Date(a.date));
         localStorage.setItem('tennisLogs', JSON.stringify(logs));
         refreshLogs();
         trainingForm.reset();
