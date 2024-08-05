@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网球训练助手</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>网球训练助手</h1>
+        
+        <!-- 训练日志部分 -->
+        <section id="training-log">
+            <h2>训练日志</h2>
+            <form id="training-form">
+                <label for="date">日期:</label>
+                <input type="date" id="date" required>
+                <label for="duration">时长 (分钟):</label>
+                <input type="number" id="duration" required>
+                <label for="notes">感受:</label>
+                <textarea id="notes" rows="4" required></textarea>
+                <button type="submit">添加记录</button>
+            </form>
+            <h3>训练记录</h3>
+            <ul id="log-list"></ul>
+        </section>
+
+        <!-- 视频收藏夹部分 -->
+        <section id="video-favorites">
+            <h2>视频收藏夹</h2>
+            <form id="video-form">
+                <label for="video-title">视频标题:</label>
+                <input type="text" id="video-title" required>
+                <label for="video-url">视频链接:</label>
+                <input type="url" id="video-url" required>
+                <button type="submit">添加视频</button>
+            </form>
+            <h3>收藏的视频</h3>
+            <ul id="video-list"></ul>
+        </section>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
